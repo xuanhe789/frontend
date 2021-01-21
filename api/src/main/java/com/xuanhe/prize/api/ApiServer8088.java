@@ -1,4 +1,4 @@
-package com.xuanhe.prize;
+package com.xuanhe.prize.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

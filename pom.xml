@@ -10,6 +10,7 @@
         <module>eureka</module>
         <module>job</module>
         <module>message</module>
+        <module>mybatis-generator</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
