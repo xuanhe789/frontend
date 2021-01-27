@@ -225,6 +225,25 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+    <select id="getProductsNumByUserId" resultType="java.lang.Integer">
+      select count(*) from  view_card_user_hit where userid=#{id} group by id
+    </select>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select * from view_card_user_hit where userid=#{id}
+  </select>
+  <select id="selectByUserIdAndGameId" resultMap="BaseResultMap">
+    select * from view_card_user_hit where userid=#{userid}
+    <if test="gameid != null">
+      and gameid=#{gameid}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Integer">
+    select count(*) from view_card_user_hit
+    where userid=#{userid}
+    <if test="gameid != null">
+      and gameid=#{gameid}
+    </if>
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     <!--
       WARNING - @mbg.generated

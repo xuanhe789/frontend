@@ -133,4 +133,6 @@ public interface CardUserMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(CardUser record);
+
+    CardUser selectByUsernameAndPassword(@Param("username") String account,@Param("password") String password);
 }

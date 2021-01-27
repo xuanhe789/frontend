@@ -124,4 +124,6 @@ public interface CardUserGameMapper {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(CardUserGame record);
+
+    Integer getGamesNumByUserId(Integer id);
 }

@@ -78,4 +78,12 @@ public interface ViewCardUserHitMapper {
      * @mbg.generated
      */
     int updateByExample(@Param("record") ViewCardUserHit record, @Param("example") ViewCardUserHitExample example);
+
+    Integer getProductsNumByUserId(Integer id);
+
+    List<ViewCardUserHit> selectByUserId(Integer id);
+
+    List<ViewCardUserHit> selectByUserIdAndGameId(@Param("userid") Integer id, @Param("gameid") int gameid);
+
+    int getTotal(@Param("userid") Integer id,@Param("gameid") int gameid);
 }

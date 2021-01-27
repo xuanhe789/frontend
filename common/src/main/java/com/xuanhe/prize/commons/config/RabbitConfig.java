@@ -7,6 +7,7 @@ import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,30 +21,34 @@ public class RabbitConfig {
     private CachingConnectionFactory connectionFactory;
 
 
-    @Bean
+    @Bean("queue_hit")
     public Queue getQueueHit() {
-        return new Queue(RabbitKeys.QUEUE_HIT);
+        return new Queue(RabbitKeys.QUEUE_HIT,true,false,false);
     }
-    @Bean
-    public Queue getQueuePlay() {
-        return new Queue(RabbitKeys.QUEUE_PLAY);
+//    @Bean
+//    public Queue getQueuePlay() {
+//        return new Queue(RabbitKeys.QUEUE_PLAY,);
+//    }
+    @Bean("queue_play")
+    public Queue getQueuePlay(){
+        return new Queue(RabbitKeys.QUEUE_PLAY,true,false,false);
     }
 
     /**
      * exchange
      */
-    @Bean
+    @Bean("directExchange")
     DirectExchange directExchange() {
-        return new DirectExchange(RabbitKeys.EXCHANGE_DIRECT);
+        return new DirectExchange(RabbitKeys.EXCHANGE_DIRECT,true,false);
     }
 
     // 绑定队列于路由
     @Bean
-    Binding bindingExchangeDirect() {
-        return BindingBuilder.bind(getQueueHit()).to(directExchange()).with(RabbitKeys.QUEUE_HIT);
+    Binding bindingExchangeDirect(@Qualifier("queue_hit") Queue queue,@Qualifier("directExchange") DirectExchange directExchange) {
+        return BindingBuilder.bind(queue).to(directExchange).with(RabbitKeys.QUEUE_HIT);
     }
     @Bean
-    Binding bindingExchangeDirect2() {
+    Binding bindingExchangeDirect2(@Qualifier("queue_play") Queue queue,@Qualifier("directExchange") DirectExchange directExchange) {
         return BindingBuilder.bind(getQueuePlay()).to(directExchange()).with(RabbitKeys.QUEUE_PLAY);
     }
 

@@ -85,12 +85,14 @@ public class GameTask implements SimpleJob {
                     tokenList.add(token);
                     //以令牌做key，对应的商品为value，创建redis缓存
                     log.info("token -> game : {} -> {}",token/1000 ,productMap.get(cardGameProduct.getProductid()).getName());
-                    redisUtils.set(RedisUtils.TOKEN+cardGameProduct.getGameid()+"_"+token,productMap.get(cardGameProduct.getProductid()),expire);
+//                    redisUtils.set(RedisUtils.TOKEN+cardGameProduct.getGameid()+"_"+token,productMap.get(cardGameProduct.getProductid()),expire);
+                    //优化，存在hash类型里面
+                    redisUtils.hset(RedisUtils.TOKEN+cardGame.getId(),token+"",productMap.get(cardGameProduct.getProductid()),expire);
                 }
             });
             //排序后放入队列
-            Collections.sort(tokenList);
-            log.info("load tokens:{}",tokenList);
+//            Collections.sort(tokenList);
+//            log.info("load tokens:{}",tokenList);
 
             //从右侧压入队列，从左到右，时间戳逐个增大
             redisUtils.rightPushAll(RedisUtils.TOKENS+cardGame.getId(),tokenList);
