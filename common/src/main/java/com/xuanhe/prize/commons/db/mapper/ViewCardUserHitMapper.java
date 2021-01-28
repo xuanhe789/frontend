@@ -86,4 +86,8 @@ public interface ViewCardUserHitMapper {
     List<ViewCardUserHit> selectByUserIdAndGameId(@Param("userid") Integer id, @Param("gameid") int gameid);
 
     int getTotal(@Param("userid") Integer id,@Param("gameid") int gameid);
+
+    List<ViewCardUserHit> selectByGameId(int gameid);
+
+    int getTotalByGameid(int gameid);
 }

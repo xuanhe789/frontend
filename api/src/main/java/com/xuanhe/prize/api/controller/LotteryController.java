@@ -103,20 +103,24 @@ public class LotteryController {
         cardUserHit.setUserid(userId);
         rabbitTemplate.convertAndSend(RabbitKeys.EXCHANGE_DIRECT,RabbitKeys.QUEUE_HIT,cardUserHit);
         //返回信息给前台
-        return new Result(1,"恭喜中奖",null);
+        return new Result(1,"恭喜中奖",cardProduct.getName());
     }
 
     /**
      * 缓存信息监控
-     * @param gameid
+     * @param
      * @return
      */
-    @GetMapping("/info/{gameid}")
-    @ApiOperation(value = "缓存信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name="gameid",value = "活动id",example = "1",required = true)
-    })
-    public Result info(@PathVariable int gameid){
-        Map map = new HashMap<>();
+//    @GetMapping("/info/{gameid}")
+//    @ApiOperation(value = "缓存信息")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name="gameid",value = "活动id",example = "1",required = true)
+//    })
+//    public Result info(@PathVariable int gameid){
+//        Map map = new HashMap<>();
+//    }
+    @GetMapping("/test")
+    public void test(){
+        rabbitTemplate.convertAndSend("test","xuan","nihao");
     }
 }

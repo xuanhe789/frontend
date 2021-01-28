@@ -11,7 +11,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableEurekaClient
 @EnableRedisHttpSession
 @MapperScan("com.xuanhe.prize.commons.db.mapper")
-@ComponentScan("com.xuanhe.prize.commons")
+@ComponentScan({"com.xuanhe.prize"})
 public class ApiServer8088 {
     public static void main(String[] args) {
         SpringApplication.run(ApiServer8088.class,args);

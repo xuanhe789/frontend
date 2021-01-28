@@ -51,7 +51,18 @@ public class RabbitConfig {
     Binding bindingExchangeDirect2(@Qualifier("queue_play") Queue queue,@Qualifier("directExchange") DirectExchange directExchange) {
         return BindingBuilder.bind(getQueuePlay()).to(directExchange()).with(RabbitKeys.QUEUE_PLAY);
     }
-
+    @Bean("test")
+    DirectExchange directExchange22() {
+        return new DirectExchange("test",true,false);
+    }
+    @Bean
+    Queue queuess(){
+        return new Queue("testQ",true,false,false);
+    }
+    @Bean
+    Binding sss(){
+        return BindingBuilder.bind(queuess()).to(directExchange22()).with("xuan");
+    }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {

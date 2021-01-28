@@ -244,6 +244,12 @@
       and gameid=#{gameid}
     </if>
   </select>
+    <select id="selectByGameId" resultMap="BaseResultMap">
+      select * from view_card_user_hit where gameid=#{gameid}
+    </select>
+  <select id="getTotalByGameid" resultType="java.lang.Integer">
+    select count(*) from view_card_user_hit where gameid=#{gameid}
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     <!--
       WARNING - @mbg.generated

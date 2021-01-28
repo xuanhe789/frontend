@@ -33,4 +33,9 @@ public class PrizeHitConsumer {
 
     }
 
+    @RabbitListener(queues = "testQ")
+    public void test(String message){
+        System.out.println(message);
+    }
+
 }
